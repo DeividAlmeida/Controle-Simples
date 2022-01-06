@@ -38,11 +38,11 @@
         <script>
             
             const { ipcRenderer } = require('electron')
-            let modulo = document.getElementById('editar')
-            let a = ipcRenderer.sendSync('synchronous-message')
-            let humor = {"valor":{}}
-            let atual = 'https://api.wacontrol.com.br/css_js/plugins/upload5/uploadsee.php?chupa'
-            var key = []
+            let modulo = document.getElementById('editar'),
+            a = ipcRenderer.sendSync('synchronous-message'),
+            humor = {"valor":{}},
+            atual = '',
+            key = []
             historico = (h) => {
                 for(let i =0; i<humor.chave.length; i++){
                         document.querySelector("tbody").innerHTML += "<tr> <td>"+humor.chave[i]+"</td> <td>"+humor.valor[i]+"</td><td>"+a.atual[a.atual.length -1][i]+"</td><td>"+(humor.valor[i]-a.atual[a.atual.length -1][i])+"</td><td><a onclick='excluir("+JSON.stringify(humor.chave[i])+")'> &#128465;</a></td></tr>";
