@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            a, th {
+                cursor:pointer;
+                font-size: 25px;
+                }
+            td {
+                text-align: center;
+                }
+            table {
+                width: 100%;
+                }
+        </style>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Total</th>
+                    <th>Total Hoje</th>
+                    <th>Crecimento</th>
+                    <th><input type="text" id="editar"></th>
+                    <th onclick="salvar()">&#128190;</th>
+                    <th onclick="adicionar()">&#128525;</th>
+                    <th id="data"></th>
+                </tr>
+            </thead>
+            <tbody>
+               
+            </tbody>
+        </table>        
+        
+        <script>
+            
+            const { ipcRenderer } = require('electron')
+            let modulo = document.getElementById('editar')
+            let a = ipcRenderer.sendSync('synchronous-message')
+            let humor = {"valor":{}}
+            let atual = 'https://api.wacontrol.com.br/css_js/plugins/upload5/uploadsee.php?chupa'
+            var key = []
+            historico = (h) => {
+                for(let i =0; i<humor.chave.length; i++){
+                        document.querySelector("tbody").innerHTML += "<tr> <td>"+humor.chave[i]+"</td> <td>"+humor.valor[i]+"</td><td>"+a.atual[a.atual.length -1][i]+"</td><td>"+(humor.valor[i]-a.atual[a.atual.length -1][i])+"</td><td><a onclick='excluir("+JSON.stringify(humor.chave[i])+")'> &#128465;</a></td></tr>";
+                    }
+            }
+            adicionar = () => {ipcRenderer.sendSync("synchronous-message", 'db.get("modulos").push({ "'+modulo.value+'": 0}).write()'); location.reload(true);}
+            excluir = (e) =>{ipcRenderer.sendSync("synchronous-message", 'db.get("modulos").remove({ "'+e+'": 0}).write()'); location.reload(true);}
+            
+            fetch(atual).then( (prom)=>{
+                prom.json().then(data =>{
+                    data.forEach((z)=>{
+                        for(let i=0; i< a.modulos.length; i++){
+                            key.push(Object.keys(a.modulos[i]));
+                            if(z.modulo == key[i]){
+                                a.modulos[i][key[i]]++
+                                humor.valor[i] = a.modulos[i][key[i]]
+                            }          
+                        }
+                    })
+                    humor.chave=([... new Set(key.flat())]) 
+                    document.getElementById("data").innerHTML =  
+                    document.getElementById("data").innerHTML = a.atualizacao[a.atual.length -1][0];
+                    for(let i =0; i<humor.chave.length; i++){
+                        document.querySelector("tbody").innerHTML += "<tr> <td>"+humor.chave[i]+"</td> <td>"+humor.valor[i]+"</td><td>"+a.atual[a.atual.length -1][i]+"</td><td>"+(humor.valor[i]-a.atual[a.atual.length -1][i])+"</td><td><a onclick='excluir("+JSON.stringify(humor.chave[i])+")'> &#128465;</a></td></tr>";
+                    }                                      
+                    salvar = ()=>{ ipcRenderer.sendSync("synchronous-message", 'db.get("atual").push('+JSON.stringify(humor.valor)+').write();db.get("atualizacao").push({ "0":"'+modulo.value+'"}).write()'); location.reload(true)}
+                })
+            })
+
+        </script>
+    </body>
+</html>

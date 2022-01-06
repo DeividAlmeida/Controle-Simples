@@ -1,0 +1,57 @@
+{
+  "modulos": [
+    {
+      "atendimento.php": 0
+    },
+    {
+      "tabela_de_precos.php": 0
+    },
+    {
+      "enquete.php": 0
+    },
+    {
+      "ecommerce.php": 0
+    },
+    {
+      "paypal.php": 0
+    },
+    {
+      "mercadopago.php": 0
+    },
+    {
+      "motoboy.php": 0
+    },
+    {
+      "fretegratis.php": 0
+    },
+    {
+      "imobiliaria.php": 0
+    },
+    {
+      "background_video.php": 0
+    },
+    {
+      "catalogo_produtos.php": 0
+    }
+  ],
+  "atual": [
+    {
+      "0": 57,
+      "1": 24,
+      "2": 22,
+      "3": 66,
+      "4": 31,
+      "5": 33,
+      "6": 30,
+      "7": 29,
+      "8": 19,
+      "9": 0,
+      "10": 100
+    }
+  ],
+  "atualizacao": [
+    {
+      "0": "02/12/2020"
+    }
+  ]
+}
